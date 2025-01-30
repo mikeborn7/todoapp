@@ -1,0 +1,11 @@
+# Node.js dependencies
+node_modules/
+
+# Python cache (if using Python later)
+__pycache__/
+
+# Database files
+*.sqlite3
+
+# Logs and temp files
+*.log

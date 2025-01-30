@@ -43,5 +43,11 @@ app.use((req, res) => {
     res.status(404).json({ error: 'Route not found' });
 });
 
-const PORT = 3000;
-app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
+// Only start the server if not in test mode
+if (process.env.NODE_ENV !== 'test') {
+    const PORT = 3000;
+    app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
+}
+
+// Export the app for Jest
+module.exports = app;

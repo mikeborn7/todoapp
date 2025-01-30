@@ -29,6 +29,11 @@ app.post('/tasks', (req, res) => {
 app.delete('/tasks/:id', (req, res) => {
     const { id } = req.params;
 
+    // Ensure ID is a valid number
+    if (isNaN(id)) {
+        return res.status(404).json({ error: 'Task not found' });
+    }
+
     const taskIndex = tasks.findIndex(task => task.id === parseInt(id));
     if (taskIndex === -1) {
         return res.status(404).json({ error: 'Task not found' });
@@ -49,5 +54,5 @@ if (process.env.NODE_ENV !== 'test') {
     app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
 }
 
-// Export the app for Jest
+// Export the app for Jest testing
 module.exports = app;

@@ -4,7 +4,7 @@ const app = require('../app'); // Import the app
 describe('ToDoApp API', () => {
     beforeEach(() => {
         // Reset tasks before each test
-        app.tasks = [];
+        global.tasks = [];
     });
 
     test('GET /tasks should return an empty array initially', async () => {
@@ -39,5 +39,17 @@ describe('ToDoApp API', () => {
         const response = await request(app).delete('/tasks/999');
         expect(response.status).toBe(404);
         expect(response.body.error).toBe('Task not found');
+    });
+
+    test('DELETE /tasks/:id should return 404 for invalid ID format', async () => {
+        const response = await request(app).delete('/tasks/invalidID');
+        expect(response.status).toBe(404);
+        expect(response.body.error).toBe('Task not found');
+    });
+
+    test('GET unknown route should return 404', async () => {
+        const response = await request(app).get('/unknownroute');
+        expect(response.status).toBe(404);
+        expect(response.body.error).toBe('Route not found');
     });
 });

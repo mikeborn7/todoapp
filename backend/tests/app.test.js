@@ -32,3 +32,29 @@ app.delete('/tasks/:id', (req, res) => {
     res.status(200).json({ message: 'Task deleted successfully' });
 });
 
+// Tests
+describe('ToDoApp API', () => {
+    beforeEach(() => {
+        tasks = []; // Reset tasks before each test
+    });
+ 
+    test('GET /tasks should return an empty array initially', async () => {
+        const response = await request(app).get('/tasks');
+        expect(response.status).toBe(200);
+        expect(response.body).toEqual([]);
+    });
+ 
+    test('POST /tasks should add a task', async () => {
+        const response = await request(app).post('/tasks').send({ task: 'Test Task' });
+        expect(response.status).toBe(201);
+        expect(response.body.text).toBe('Test Task');
+    });
+ 
+    test('POST /tasks should validate task input', async () => {
+        const response = await request(app).post('/tasks').send({ task: '' });
+        expect(response.status).toBe(400);
+        expect(response.body.error).toBe('Task text is required');
+    });
+ 
+});
+ 

@@ -29,6 +29,11 @@ app.post('/tasks', (req, res) => {
 app.delete('/tasks/:id', (req, res) => {
     const { id } = req.params;
 
+    // Ensure ID is a valid number
+    if (isNaN(id)) {
+        return res.status(404).json({ error: 'Task not found' });
+    }
+
     const taskIndex = tasks.findIndex(task => task.id === parseInt(id));
     if (taskIndex === -1) {
         return res.status(404).json({ error: 'Task not found' });
@@ -43,5 +48,11 @@ app.use((req, res) => {
     res.status(404).json({ error: 'Route not found' });
 });
 
-const PORT = 3000;
-app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
+// Only start the server if not in test mode
+if (process.env.NODE_ENV !== 'test') {
+    const PORT = 3000;
+    app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
+}
+
+// Export the app for Jest testing
+module.exports = app;

@@ -1,28 +1,41 @@
+/* General Reset */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Poppins', Arial, sans-serif;
+    /* Modern font */
     margin: 0;
     padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #f4f4f4;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    /* Cool gradient background */
+    color: #333;
 }
 
+/* App Container */
 #app {
     width: 100%;
     max-width: 400px;
     background: white;
     padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-}
-
-h1 {
+    border-radius: 16px;
+    /* Softer corners */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    /* More modern shadow */
     text-align: center;
-    margin-bottom: 20px;
+    animation: fadeIn 0.6s ease-in-out;
+    /* Subtle fade-in animation */
 }
 
+/* Title */
+h1 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Task Input Section */
 #task-input {
     display: flex;
     gap: 10px;
@@ -31,24 +44,34 @@ h1 {
 
 #new-task {
     flex: 1;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+#new-task:focus {
+    border-color: #764ba2;
 }
 
 #add-task {
-    padding: 10px 20px;
+    padding: 12px 20px;
     border: none;
-    background-color: #007bff;
+    background: #764ba2;
     color: white;
-    border-radius: 4px;
+    border-radius: 8px;
+    font-size: 0.9rem;
     cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
 }
 
 #add-task:hover {
-    background-color: #0056b3;
+    background: #5a3b8a;
+    transform: scale(1.05);
 }
 
+/* Task List */
 #task-list {
     list-style: none;
     padding: 0;
@@ -57,11 +80,46 @@ h1 {
 
 #task-list li {
     padding: 10px;
-    background: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    background: #f4f4f4;
+    border: 2px solid #ddd;
+    border-radius: 8px;
     margin-bottom: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+#task-list li:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Delete Button in Task List */
+#task-list li button {
+    background: #ff6b6b;
+    border: none;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: background 0.3s ease;
+}
+
+#task-list li button:hover {
+    background: #d94343;
+}
+
+/* Animation for Fade-In */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
